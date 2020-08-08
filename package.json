@@ -1,0 +1,70 @@
+{
+  "name": "gnv",
+  "version": "2.2.0",
+  "description": "Javascript development workspaces built around Closure Compiler.",
+  "type": "module",
+  "bin": {
+    "gnv": "./dist/cli.min.cjs"
+  },
+  "main": "./dist/node.min.cjs",
+  "exports": {
+    "import": "./dist/node.min.mjs",
+    "require": "./dist/node.min.cjs"
+  },
+  "scripts": {
+    "build": "yarn clean && yarn compile && yarn test",
+    "clean": "rm -rf ./dist/* && rm -rf ./dev/*",
+    "compile": "yarn run:rollup && yarn run:webpack && yarn run:gulp",
+    "dev": "yarn rollup -c",
+    "run:gulp": "yarn gulp",
+    "run:rollup": "yarn rollup -c",
+    "run:webpack": "yarn webpack --config webpack.config.cjs",
+    "test": "yarn mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeleworkInc/gnv.git"
+  },
+  "keywords": [
+    "closure",
+    "compiler",
+    "google",
+    "es6",
+    "es2015"
+  ],
+  "author": "Christian Lewis <hello@trytelework.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeleworkInc/gnv/issues"
+  },
+  "homepage": "https://github.com/TeleworkInc/gnv#readme",
+  "dependencies": {
+    "await-shell": "^1.26.0",
+    "chai-as-promised": "^7.1.1",
+    "chalk": "^4.1.0",
+    "chokidar": "^3.4.0",
+    "commander": "^5.1.0",
+    "figlet": "^1.4.0",
+    "filetouch": "^1.4.0",
+    "google-closure-library": "^20200719.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "ora": "^4.0.4",
+    "touch": "^3.1.0",
+    "tree-node-cli": "^1.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.4.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-jsdoc": "^30.0.3",
+    "google-closure-compiler": "^20200719.0.0",
+    "mocha": "^8.0.1",
+    "rollup": "^2.21.0",
+    "shebang-loader": "^0.0.1",
+    "webpack": "~4.43.0",
+    "webpack-cli": "~3.3.12"
+  }
+}

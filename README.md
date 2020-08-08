@@ -1,2 +1,2 @@
-# gdev-template
-A directory template for gdev workspaces.
+# gnv-template
+A directory template for gnv workspaces.
