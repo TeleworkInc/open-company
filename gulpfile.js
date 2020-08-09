@@ -2,7 +2,7 @@
  * @license MIT
  */
 /**
- * @file
+ * @fileoverview
  * Runs preprocessed dev files through Google's Closure Compiler.
  */
 
@@ -10,7 +10,6 @@ import glob from 'glob';
 import gulp from 'gulp';
 import Closure from 'google-closure-compiler';
 import fs from 'fs';
-import path from 'path';
 
 const Compiler = Closure.compiler;
 
@@ -64,11 +63,10 @@ export const startCompileTask = (options = {}) => {
  * @return {void}
  */
 export const compileCJS = async (file, options = {}) => {
-  const name = path.parse(file).name;
   await startCompileTask({
     // I/O setup.
     js: file,
-    js_output_file: file.replace('dev', 'dist').replace(name, `${name}.min`),
+    js_output_file: file.replace('dev', 'dist'),
 
     // SIMPLE compilation for CJS to avoid renaming.
     compilation_level: 'SIMPLE',
@@ -90,11 +88,10 @@ export const compileCJS = async (file, options = {}) => {
  * @return {void}
  */
 export const compileESM = async (file, options = {}) => {
-  const name = path.parse(file).name;
   await startCompileTask({
     // I/O setup.
     js: file,
-    js_output_file: file.replace('dev', 'dist').replace(name, `${name}.min`),
+    js_output_file: file.replace('dev', 'dist'),
 
     // Don't rename vars, use NODE module_resolution.
     ...NO_RENAMING,
@@ -155,8 +152,6 @@ export const nodeCompile = async () => await compileCJS('dev/node.cjs');
  */
 export const universalCompile = async () => {
   await compileCJS('dev/universal.cjs', {
-    // SIMPLE compilation and language_in == language_out to prevent name
-    // mangling while getting maximum compression.
     compilation_level: 'SIMPLE',
     language_in: 'ES_NEXT',
     language_out: 'ECMASCRIPT5_STRICT',

@@ -6,4 +6,4 @@
 /*
  MIT
 */
-console.log("Boom, a side effect!");
+console.log("a is 10");

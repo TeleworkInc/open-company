@@ -1,2 +1,2 @@
-# gnv-template
-A directory template for gnv workspaces.
+# gnv-template-project-name
+Welcome to my new project!

@@ -1,8 +1,12 @@
 /**
  * @license MIT
- * @file Uses Rollup for ESM bundling, primarily for dev refresh on save.
+ *
+ * @fileoverview
+ * Uses Rollup for ESM bundling, primarily for dev refresh on save.
  */
+
 import glob from 'glob';
+import exportDefault from 'rollup-plugin-export-default';
 
 export const exportESM = (file) => {
   return {
@@ -15,6 +19,9 @@ export const exportESM = (file) => {
       // will help with compiler inlining
       preferConst: true,
     },
+    plugins: [
+      exportDefault(),
+    ],
   };
 };
 

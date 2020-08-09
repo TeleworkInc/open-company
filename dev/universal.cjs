@@ -6,43 +6,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
  * @license MIT
  */
 /**
- * @file
- * A test file.
- */
-
-/** @ignore */
-class TestA {
-  /** @ignore */
-  constructor() {
-    console.log('Test A!');
-  }
-}
-/** @ignore */
-class TestB {
-  /** @ignore */
-  constructor() {
-    console.log('Test B!');
-  }
-}
-
-/* eslint-disable jsdoc/require-file-overview */
-/* eslint-disable require-jsdoc */
-class TestC {
-  constructor() {
-    console.log('Test C!');
-  }
-}
-
-/* eslint-disable jsdoc/require-file-overview */
-/* eslint-disable require-jsdoc */
-class TestDefault {
-  constructor() {
-    console.log('Look out, we\'ve got a default over here!');
-  }
-}
-
-/**
- * @license MIT
+ * @fileoverview
+ * Some global const strings we might need throughout our package.
  */
 
 const TEST_STRING = 'HELLO WORLD!';
@@ -51,20 +16,10 @@ const TEST_STRING = 'HELLO WORLD!';
  * @license MIT
  */
 
-console.log('Boom, a side effect!');
-
 /**
- * @param {string} a
- * Test.
+ * This is a side effect that won't get removed due to dead code elimination.
  */
-// function test(a: String) {
-//   console.log(a);
-// }
-
-// test('Hello world!');
+const a = 10;
+console.log(`a is ${a}`);
 
 exports.TEST_STRING = TEST_STRING;
-exports.TestA = TestA;
-exports.TestB = TestB;
-exports.TestC = TestC;
-exports.TestDefault = TestDefault;
