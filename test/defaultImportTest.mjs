@@ -7,12 +7,12 @@
  */
 
 import 'chai/register-expect.js';
-import dev from '../dev/node.mjs';
+import devNode from '../dev/node.mjs';
 import { sayHello } from '../dev/node.mjs';
 
 describe('Default ESM import from [dev/node.mjs]', () => {
   it('should be non-null', () => {
-    expect(dev).to.not.be.undefined;
+    expect(devNode).to.not.be.undefined;
   });
 });
 

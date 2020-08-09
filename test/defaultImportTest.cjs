@@ -8,12 +8,12 @@
 
 require('chai/register-expect');
 
-const dev = require('../dev/node.cjs');
+const devNode = require('../dev/node.cjs');
 const { sayHello } = require('../dev/node.cjs');
 
 describe('Default CJS import from [dev/node.cjs]', () => {
   it('should be non-null', () => {
-    expect(dev).to.not.be.undefined;
+    expect(devNode).to.not.be.undefined;
   });
 });
 
