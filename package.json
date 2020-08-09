@@ -11,13 +11,26 @@
     "import": "./dist/node.mjs",
     "require": "./dist/node.cjs"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "yarn rollup -c && yarn webpack --config webpack.config.cjs && yarn gulp",
+    "clean": "rm -rf dist/* && rm -rf dev/*",
+    "test": "mocha"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "chai": "^4.2.0",
     "commander": "^6.0.0",
-    "eslint-plugin-consistent-imports": "^1.8.0"
-  },
-  "devDependencies": {}
+    "eslint-plugin-consistent-imports": "^1.8.0",
+    "google-closure-compiler": "^20200719.0.0",
+    "google-closure-library": "^20200719.0.0",
+    "gulp": "^4.0.2",
+    "mocha": "^8.1.1",
+    "rollup": "^2.23.1",
+    "rollup-plugin-export-default": "^1.2.0",
+    "shebang-loader": "^0.0.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
 }

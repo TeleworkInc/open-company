@@ -47,22 +47,13 @@ const EXPORT_CJS = {
   },
 };
 
-// const EXPORT_ESM = {
-//   ...EXPORT_DEFAULTS,
-//   output: {
-//     path: path.resolve(__dirname, 'dev'),
-//     filename: '[name].cjs',
-//     libraryTarget: 'commonjs',
-//   },
-// };
-
 const exportCJS = (file) => {
   const name = path.parse(file).name;
   return {
     entry: {
       [name]: file,
     },
-    target: 'async-node',
+    target: 'node',
     ...EXPORT_CJS,
   };
 };

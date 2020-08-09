@@ -99,7 +99,15 @@ __webpack_require__.r(__webpack_exports__);
  * Specify the commands for this project's CLI.
  */
 
-const sayHello = () => console.log('Hello world!');
+/**
+ * Say hello!
+ *
+ * @param {string} msg
+ * The message to print.
+ *
+ * @return {void}
+ */
+const sayHello = (msg = 'Hello world!') => console.log(msg);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({ sayHello });
