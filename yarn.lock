@@ -6,3 +6,15 @@ commander@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-6.0.0.tgz#2b270da94f8fb9014455312f829a1129dbf8887e"
   integrity sha512-s7EA+hDtTYNhuXkTlhqew4txMZVdszBmKWSPEMxGr8ru8JXR7bLUFIAtPhcSuFdJQ0ILMxnJi8GkQL0yvDy/YA==
+
+eslint-plugin-consistent-imports@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-consistent-imports/-/eslint-plugin-consistent-imports-1.8.0.tgz#c66fdb1aac332ff8fb156046ffe93535283bfa2b"
+  integrity sha512-GrrwA5jeR8v2n0aclNA9+hOcrdIeb3T54vNPp6zvyi77JSpgrJZNKIP5Jyijy/P1t+JFZpiaAMiXkbDB7sfSgA==
+  dependencies:
+    requireindex "~1.1.0"
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=

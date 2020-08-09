@@ -1,10 +1,10 @@
 {
-  "name": "gnv-template-project-name",
+  "name": "gnv-template",
   "version": "2.2.0",
   "description": "",
   "type": "module",
   "bin": {
-    "gnv-template-project-name": "./dist/cli.cjs"
+    "gnv-template": "./dist/cli.cjs"
   },
   "main": "./dist/node.cjs",
   "exports": {
@@ -16,7 +16,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "commander": "^6.0.0"
+    "commander": "^6.0.0",
+    "eslint-plugin-consistent-imports": "^1.8.0"
   },
   "devDependencies": {}
 }

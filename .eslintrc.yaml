@@ -8,6 +8,7 @@ env:
 
 extends:
   - google
+  - plugin:consistent-imports/recommended
   - plugin:jsdoc/recommended
 
 parserOptions:
@@ -59,7 +60,7 @@ rules:
 
   operator-linebreak:
     - error
-    - before
+    - after
 
   object-curly-spacing:
     - error
@@ -70,17 +71,12 @@ rules:
     - always
 
 settings:
-
-  import/resolver:
-    node:
-      extensions:
-        - .js
-        - .mjs
-        - .cjs
-
   jsdoc:
     mode: closure
     tagNamePreference:
       # Disable @fileoverview -> @file replacement
       fileoverview: fileoverview
       file: fileoverview
+
+plugins:
+  - consistent-imports
