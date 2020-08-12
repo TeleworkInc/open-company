@@ -4,17 +4,13 @@
   "description": "",
   "type": "module",
   "bin": {
-    "gnv-template": "./dist/cli.cjs"
+    "gnv-template": "./dist/cli.cjs",
+    "gnv-template-dev": "./exports/cli.cjs"
   },
   "main": "./dist/node.cjs",
   "exports": {
     "import": "./dist/node.mjs",
     "require": "./dist/node.cjs"
-  },
-  "scripts": {
-    "build": "yarn rollup -c && yarn webpack --config webpack.config.cjs && yarn gulp",
-    "clean": "rm -rf dist/* && rm -rf dev/*",
-    "test": "mocha"
   },
   "keywords": [],
   "author": "",
