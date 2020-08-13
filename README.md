@@ -1,5 +1,5 @@
 # gnv-template
-## Welcome to my [gnv project](https://github.com/TeleworkInc/gnv)!
+### Welcome to my [gnv project](https://github.com/TeleworkInc/gnv)!
 
 I'm one big ES6 module, and I compile to multiple targets. 
 
