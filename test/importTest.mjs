@@ -6,7 +6,7 @@
  */
 
 import 'chai/register-expect.js';
-import * as thisPackage from 'gnv-template';
+import * as thisPackage from '../dist/node.mjs';
 
 import * as devCli from '../dev/cli.mjs';
 import * as distCli from '../dist/cli.mjs';
