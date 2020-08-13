@@ -16,8 +16,14 @@ parserOptions:
   # sourceType: module
 
 ignorePatterns:
+  # Include JS dotfiles
+  - '!/.*.js'
+  
+  # Exclude dist/ and dev/
   - '**/dist/**'
   - '**/dev/**'
+
+  # Exclude any Closure Compiler externs
   - externs.js
 
 rules:
