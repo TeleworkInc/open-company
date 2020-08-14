@@ -21,7 +21,7 @@
     "build:dev": "yarn run:rollup && yarn run:webpack",
     "build:dist": "yarn run:gulp",
     "build": "yarn clean && yarn build:dev && yarn build:dist && yarn test",
-    "clean": "rm -rf ./dist/* && rm -rf ./dev/*",
+    "clean": "rm -rf ./dev/* ./dist/*",
     "run:gulp": "yarn gulp -f .gnv/config.gulp.mjs",
     "run:rollup": "yarn rollup -c .gnv/config.rollup.mjs",
     "run:webpack": "yarn webpack --config .gnv/config.webpack.cjs",
