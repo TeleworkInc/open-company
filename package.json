@@ -1,6 +1,6 @@
 {
   "name": "gnv-template",
-  "version": "3.0.0",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "bin": {
@@ -12,7 +12,9 @@
     "import": "./dist/node.mjs",
     "require": "./dist/node.cjs"
   },
-  "keywords": [],
+  "keywords": [
+    "gnv"
+  ],
   "author": "",
   "license": "MIT",
   "scripts": {
