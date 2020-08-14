@@ -1,7 +1,17 @@
 # gnv-template
+
 ### Welcome to my [gnv project](https://github.com/TeleworkInc/gnv)!
 
 I'm one big ES6 module, and I compile to multiple targets. 
+
+## Installing
+Clone this repository, and then enter the directory and install globally:
+```bash
+cd gnv-template
+yarn link
+```
+
+## Development
 
 ### Prerequisites
 Make sure to install `gnv` globally with:
