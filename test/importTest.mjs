@@ -5,6 +5,10 @@
  * Test ESM imports for this project.
  */
 
+global.SHELL_OPTIONS = {
+  stdio: 'ignore',
+};
+
 import 'chai/register-expect.js';
 import * as thisPackage from '../dist/node.mjs';
 
@@ -16,6 +20,8 @@ import * as distNode from '../dist/node.mjs';
 
 import * as devUniversal from '../dev/universal.mjs';
 import * as distUniversal from '../dist/universal.mjs';
+
+import shell from 'await-shell';
 
 describe('ESM import', () => {
   it('should import this package', () => {
@@ -30,12 +36,12 @@ describe('ESM import', () => {
     expect(distNode.sayHello).to.be.a('function');
   });
 
-  it('should not fail for uncompiled ESM [dev/cli.mjs]', () => {
-    expect(() => devCli).to.not.throw();
+  it('should not fail for uncompiled ESM [dev/cli.mjs]', async () => {
+    await shell('node dev/cli.mjs');
   });
 
-  it('should not fail for compiled ESM [dist/cli.mjs]', () => {
-    expect(() => distCli).to.not.throw();
+  it('should not fail for compiled ESM [dist/cli.mjs]', async () => {
+    await shell('node dist/cli.mjs');
   });
 
   it('should import test classes from [dev/universal.mjs]', () => {

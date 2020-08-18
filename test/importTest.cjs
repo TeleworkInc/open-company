@@ -5,7 +5,12 @@
  * Test CJS imports for this project.
  */
 
+const shell = require('await-shell');
 require('chai/register-expect');
+
+global.SHELL_OPTIONS = {
+  stdio: 'ignore',
+};
 
 describe('CJS require()', () => {
   it('should import this npm package', () => {
@@ -20,8 +25,8 @@ describe('CJS require()', () => {
     expect(require('../dist/node.cjs').sayHello).to.be.a('function');
   });
 
-  it('should not fail for uncompiled CLI bundle [dev/cli.cjs]', () => {
-    expect(() => require('../dev/cli.cjs')).to.not.throw();
+  it('should not fail for uncompiled CLI bundle [dev/cli.cjs]', async () => {
+    await shell('node dev/cli.cjs');
   });
 
   it('should not fail for compiled CLI bundle [dist/cli.cjs]', () => {
