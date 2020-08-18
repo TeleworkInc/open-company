@@ -22,6 +22,10 @@ ignorePatterns:
   - externs.js
 
 rules:
+
+  brace-style:
+    - error
+    - stroustrup
   
   jsdoc/check-tag-names:
     - error
