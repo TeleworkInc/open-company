@@ -4,11 +4,9 @@ node_js:
   - lts/*
 
 # Install gnv
-install: npm i -g gnv
-
-# Ensure gnv-dev linked
-postinstall:
-  # Install necessary global gnv deps
+install:
+  - npm i -g gnv
   - gnv install-peer-deps
-  # Build this project
-  - gnv build
+
+# Build this project
+script: gnv build
