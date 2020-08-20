@@ -15,14 +15,18 @@
     "require": "./dist/node.cjs"
   },
   "scripts": {
-    "boot": "node .gnv/boot.js",
-    "cold-start": "",
-    "build:dev": "rollup -c .gnv/config.rollup.dev.es.mjs && rollup -c .gnv/config.rollup.dev.cjs.mjs",
-    "build:dist": "rollup -c .gnv/config.rollup.dist.es.mjs && rollup -c .gnv/config.rollup.dist.cjs.mjs && rollup -c .gnv/config.rollup.minify.mjs",
+    "cold-start": "npm run boot && npm run build",
+    "create-bin": "mkdir -p dist && touch dist/cli.cjs",
+    "boot": "npm run create-bin && node .gnv/boot.js",
     "prebuild": "npm run clean",
-    "build": "npm run build:dev && npm run build:dist",
+    "build": "npm run build:dev && npm run build:dist && npm run build:exe && npm run format-clis",
+    "build:dev": "rollup -c .gnv/rollup.dev.es.js && rollup -c .gnv/rollup.dev.cjs.js",
+    "build:dist": "rollup -c .gnv/rollup.dist.es.js && rollup -c .gnv/rollup.dist.cjs.js",
+    "build:exe": "node .gnv/buildExe.js",
     "postbuild": "npm run test",
-    "clean": "rm -rf ./dist/* && rm -rf ./dev/*",
+    "minify:dist": "rollup -c .gnv/rollup.dist.minify.js",
+    "format-clis": "sed -i '1i #!/usr/bin/env node' dist/cli.* && (chmod -f +x exports/cli.* dev/cli.* dist/cli.* || true)",
+    "clean": "rm -rf dist/* && rm -rf dev/*",
     "test": "mocha"
   },
   "repository": {
