@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 14
+  - lts/*
+
+# Install gnv
+install: npm i -g gnv
+# Ensure gnv-dev linked
+postinstall: gnv build
