@@ -5,7 +5,7 @@ node_js:
 
 # Install gnv
 install:
-  - npm i -g gnv
+  - npm i -g --silent gnv
   - gnv install-peer-deps
 
 # Build this project
