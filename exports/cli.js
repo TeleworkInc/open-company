@@ -30,7 +30,8 @@ commander
 try {
   commander.exitOverride();
   commander.parse(process.argv);
-} catch (e) {
+}
+catch (e) {
   /**
    * Don't bother throwing any errors if there are no args provided.
    */
