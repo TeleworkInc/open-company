@@ -159,28 +159,7 @@ export const add = async (packageStrings, command) => {
 
 export const remove = async () => {};
 
-export const install = async (installThis = false) => {
-  /**
-   * If installing this package, only install peerDependencies.
-   */
-  if (installThis) {
-    spacer('Installing own peer dependencies.');
-    await installPeerDependencies(true);
-  }
-  /**
-   * Otherwise, install global and local dependencies for the package.json in
-   * the current working directory.
-   */
-  else {
-    await installGnvDependencies();
-    await installPeerDependencies();
-  };
-};
-
-/**
- * Get ALL dependencies for a package.
- */
-export const get = async () => {
+export const install = async (command = {}) => {
   /**
    * Link this package. This has to be done before everything else due to the
    * weird behavior of npm, which will delete necessary dependencies if this is
@@ -189,18 +168,37 @@ export const get = async () => {
   spacer('Linking this package to global bin...');
   await callNpm('link', '-f', '--no-save', '--silent');
 
+  /**
+   * If not in dev mode, install just the peer deps.
+   */
+  if (!command.dev) {
+    spacer('Release mode: Installing peer dependencies only.');
+    await getGlobalDeps(command.self);
+  }
+  /**
+   * Otherwise, install global and local dependencies for the package.json.
+   */
+  else {
+    await getLocalDeps(command.self);
+    await getGlobalDeps(command.self);
+  };
+};
 
+/**
+ * Get ALL dependencies for a package.
+ */
+export const getAllDeps = async () => {
   /**
    * Install gnvDependencies for the package.json in the parent folder.
    */
-  await installGnvDependencies(true);
+  await getLocalDeps(true);
 
 
   /**
    * Install peerDependencies for the package.json in the parent folder, and
    * link into local `node_modules`.
    */
-  await installPeerDependencies(true);
+  await getGlobalDeps(true);
 };
 
 /**
@@ -213,7 +211,7 @@ export const get = async () => {
  *
  * @return {void}
  */
-export const installGnvDependencies = async (absolute = false) => {
+export const getLocalDeps = async (absolute = false) => {
   const packageJson = readPackageJson(absolute);
   const gnvDependencies = getPackageStrings(packageJson.gnvDependencies);
 
@@ -223,7 +221,7 @@ export const installGnvDependencies = async (absolute = false) => {
 
   spacer('Adding local gnv deps to node_modules:');
   await callNpm('i', '-f', '--no-save', '--silent', ...gnvDependencies);
-  spacer(`Installed ${gnvDependencies.length} packages.\n`);
+  spacer(`Installed ${gnvDependencies.length} packages.`);
 };
 
 /**
@@ -236,7 +234,7 @@ export const installGnvDependencies = async (absolute = false) => {
  *
  * @return {void}
  */
-export const installPeerDependencies = async (absolute = false) => {
+export const getGlobalDeps = async (absolute = false) => {
   const packageJson = readPackageJson(absolute);
   const peerDependencies = getPackageStrings(packageJson.peerDependencies);
 
@@ -324,4 +322,4 @@ export const writePackageJson = (obj, absolute = false, spaces = 2) => (
  *
  * @return {string} version
  */
-export const getVersion = async () => readPackageJson(true).version;
+export const getVersion = () => readPackageJson(true).version;
