@@ -3,10 +3,11 @@ node_js:
   - 14
   - lts/*
 
-# Install gnv
+# Install gnv with `npm i -g`, then add peer deps with `gnv postinstall`.
 install:
   - npm i -g --silent gnv
-  - gnv boot
+  - gnv postinstall
 
-# Build this project
-script: gnv build
+# Build the gnv template with `gnv build`.
+script:
+  - gnv build
