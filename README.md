@@ -13,16 +13,23 @@ yarn link
 
 ## Development
 
-### Prerequisites
+### Install `gnv`
 Make sure to install `gnv` globally with:
 ```bash
 yarn global add gnv
+# or
+npm i -g gnv
+```
+
+And download any peer deps needed by `gnv` with:
+```bash
+gnv get-peer-deps
 ```
 
 ### Test out the CLI
-Link this package to your bin with:
+Install the development dependencies for this package:
 ```bash
-yarn link
+gnv install -d # installs this project's dev and release deps
 ```
 
 and then run the dev CLI (executes source at `exports/cli.js`):
