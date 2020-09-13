@@ -26,7 +26,7 @@
     "build:exe": "node .gnv/npm/buildExes.js",
     "postbuild": "npm run test",
     "minify:dist": "rollup -c .gnv/rollup.dist.minify.js",
-    "format-clis": "sed -i '1i #!/usr/bin/env node' dist/cli.* && (chmod -f +x exports/cli.* dev/cli.* dist/cli.* || true)",
+    "format-clis": "if [ -f dist/cli.cjs ]; then sed -i '1i #!/usr/bin/env node' dist/cli.* && chmod -f +x exports/cli.* dev/cli.* dist/cli.*; fi",
     "clean": "rm -rf dist/* && rm -rf dev/*",
     "test": "mocha && npm run test:exe",
     "test:exe": "if [ -f dist/exe.js ]; then enable-browser-mode dist/exe.js; fi"

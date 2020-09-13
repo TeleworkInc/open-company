@@ -9,7 +9,7 @@
 /**
  * Expose data from `lib/`.
  */
-export * from '../lib/templates.js';
+export * from '../lib/globals.js';
 
 /**
  * This is a side effect that won't get removed due to dead code elimination.
