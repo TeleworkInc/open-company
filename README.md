@@ -1,4 +1,4 @@
-# gnv-template
+# function-tostring
 
 ### Welcome to my [gnv project](https://github.com/TeleworkInc/gnv)!
 
@@ -7,7 +7,7 @@ I'm one big ES6 module, and I compile to multiple targets.
 ## Installing
 Clone this repository, and then enter the directory and install globally:
 ```bash
-cd gnv-template
+cd function-tostring
 yarn link
 ```
 
@@ -34,10 +34,10 @@ gnv install -d # installs this project's dev and release deps
 
 and then run the dev CLI (executes source at `exports/cli.js`):
 ```bash
-gnv-template-dev --help
+function-tostring-dev --help
 ```
 ```none
-Usage: gnv-template-dev [options] [command]
+Usage: function-tostring-dev [options] [command]
 
 Options:
   -h, --help       display help for command
@@ -54,7 +54,7 @@ gnv build
 
 And run the production CLI (executes release build at `dist/cli.cjs`):
 ```bash
-gnv-template --help
+function-tostring --help
 ```
 
 ## License
