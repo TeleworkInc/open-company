@@ -1,13 +1,13 @@
 {
-  "name": "function-tostring",
+  "name": "gnv-template",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "function-tostring": "./dist/cli.cjs",
-    "function-tostring-dev": "./exports/cli.js"
+    "gnv-template": "./dist/cli.cjs",
+    "gnv-template-dev": "./exports/cli.js"
   },
   "main": "./dist/node.cjs",
   "exports": {
