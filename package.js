@@ -7,6 +7,8 @@
  * any third-party modules.
  */
 
+import { PRODUCTION } from './lib/globals.js';
+
 import fs from 'fs';
 import path from 'path';
 
@@ -16,6 +18,26 @@ import {
   readFileSync,
   writeFileSync,
 } from 'fs';
+
+/**
+ * Call process.exit(1) on shell failure.
+ */
+global.SHELL_STRICT = true;
+/**
+ * Log commands as they are fed to the shell.
+ */
+global.SHELL_LOG = true;
+/**
+ * Use verbose logging by default.
+ */
+global.SHELL_OPTIONS = {
+  shell: true,
+  stdio: (
+    PRODUCTION
+      ? [ 'ignore', 'ignore', 'inherit' ]
+      : 'inherit'
+  ),
+};
 
 const spacer = (...msgs) => console.log(
     '\x1b[96m%s\x1b[0m', `[𝓰𝓷𝓿]` + ` ${msgs.join(' ')}`,
@@ -31,13 +53,13 @@ const callNpm = async (...args) => {
   console.log(`\n> npm ${args.join(' ')}\n`);
   await spawnSync(
       'npm',
-      args,
-      {
-        /**
-         * Only inherit stderr.
-         */
-        stdio: [ 'ignore', 'ignore', 'inherit' ],
-      },
+      [
+        /** Supplied args. */
+        ...args,
+        /** Use ERROR log level. */
+        '--loglevel error',
+      ],
+      global.SHELL_OPTIONS,
   );
 };
 
@@ -87,12 +109,11 @@ export const writePackageJson = (obj, {
       'package.json',
   );
 
-  if (existsSync(fileName)) {
+  if (existsSync(fileName))
     writeFileSync(
         fileName,
         JSON.stringify(obj, null, spaces),
     );
-  }
 };
 
 /**
@@ -125,9 +146,9 @@ const getPackageInfo = (packageString) => {
   let orgString;
   let version;
 
-  if (packageString[0] === '@') {
+  if (packageString[0] === '@')
     [ orgString, packageString ] = packageString.split('/');
-  }
+
 
   [ packageString, version ] = packageString.split('@');
 
@@ -156,13 +177,13 @@ export const checkInsideProject = (silent) => {
   const configExists = fs.existsSync(
       path.resolve(process.cwd(), '.gnv'),
   );
-  if (!configExists) {
+  if (!configExists)
     if (silent) return false;
     else {
       spacer('Oops! Not inside a gnv project.');
       process.exit(1);
     }
-  }
+
   return true;
 };
 
@@ -294,6 +315,13 @@ export const install = async (
    */
   checkInsideProject();
   /**
+   * Make sure files exist.
+   */
+  if (!fs.existsSync('dist')) fs.mkdirSync('dist');
+  if (!fs.existsSync('dist/cli.cjs'))
+    fs.closeSync(fs.openSync('dist/cli.cjs', 'a'));
+
+  /**
    * Link this package. This has to be done before everything else due to the
    * weird behavior of npm, which will delete necessary dependencies if this is
    * run after installing peerDeps or gnvDeps.
@@ -315,8 +343,8 @@ export const install = async (
     await installLocalDeps();
     await installGlobalDeps();
     spacer(
-        `Done! Your development CLI should be ready at `
-      + `\`${path.basename(process.cwd())}-dev\`.`,
+        `Done! Your development CLI should be ready at ` +
+      `\`${path.basename(process.cwd())}-dev\`.`,
     );
   };
   /**
@@ -337,12 +365,12 @@ export const installLocalDeps = async (directory) => {
   const packageJson = readPackageJson(directory);
   const gnvDependencies = getPackageStrings(packageJson.gnvDependencies);
 
-  if (!gnvDependencies.length) {
+  if (!gnvDependencies.length)
     return spacer('No gnvDependencies to install.');
-  }
+
 
   spacer('Adding local gnv deps to node_modules:');
-  await callNpm('i', '-f', '--no-save', '--silent', ...gnvDependencies);
+  await callNpm('i', '-f', '--no-save', ...gnvDependencies);
   spacer(`Installed ${gnvDependencies.length} packages.`);
 };
 
@@ -359,9 +387,9 @@ export const installGlobalDeps = async (directory) => {
   const packageJson = readPackageJson(directory);
   const peerDependencies = getPackageStrings(packageJson.peerDependencies);
 
-  if (!peerDependencies.length) {
+  if (!peerDependencies.length)
     return spacer('No peerDependencies to install.');
-  }
+
 
   /**
    * Make sure no previous versions of this package are linked in this
@@ -373,14 +401,14 @@ export const installGlobalDeps = async (directory) => {
    * Install peerDeps globally.
    */
   spacer('Adding global peerDeps:');
-  await callNpm('i', '-g', '--no-save', '--silent', ...peerDependencies);
+  await callNpm('i', '-g', '--no-save', ...peerDependencies);
 
   /**
    * Link peerDeps locally. Also links this package so that CLIs are
    * available.
    */
   spacer('Linking peer dependencies locally...');
-  await callNpm('link', '-f', '--no-save', '--silent', ...anyVersionPeerDeps);
+  await callNpm('link', '-f', '--no-save', ...anyVersionPeerDeps);
   spacer(`Installed and linked ${peerDependencies.length} packages.`);
 };
 
