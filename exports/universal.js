@@ -16,3 +16,5 @@ export * from '../lib/globals.js';
  */
 const a = 10;
 console.log(`a is ${a}`);
+
+export const TEST_STRING = 'test';

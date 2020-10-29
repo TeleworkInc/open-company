@@ -7,8 +7,6 @@
  * any third-party modules.
  */
 
-import { PRODUCTION } from './lib/globals.js';
-
 import fs from 'fs';
 import path from 'path';
 
@@ -18,26 +16,6 @@ import {
   readFileSync,
   writeFileSync,
 } from 'fs';
-
-/**
- * Call process.exit(1) on shell failure.
- */
-global.SHELL_STRICT = true;
-/**
- * Log commands as they are fed to the shell.
- */
-global.SHELL_LOG = true;
-/**
- * Use verbose logging by default.
- */
-global.SHELL_OPTIONS = {
-  shell: true,
-  stdio: (
-    PRODUCTION
-      ? [ 'ignore', 'ignore', 'inherit' ]
-      : 'inherit'
-  ),
-};
 
 const spacer = (...msgs) => console.log(
     '\x1b[96m%s\x1b[0m', `[𝓰𝓷𝓿]` + ` ${msgs.join(' ')}`,
@@ -53,13 +31,13 @@ const callNpm = async (...args) => {
   console.log(`\n> npm ${args.join(' ')}\n`);
   await spawnSync(
       'npm',
-      [
-        /** Supplied args. */
-        ...args,
-        /** Use ERROR log level. */
-        '--loglevel error',
-      ],
-      global.SHELL_OPTIONS,
+      args,
+      {
+        /**
+         * Only inherit stderr.
+         */
+        stdio: [ 'ignore', 'ignore', 'inherit' ],
+      },
   );
 };
 
@@ -370,7 +348,7 @@ export const installLocalDeps = async (directory) => {
 
 
   spacer('Adding local gnv deps to node_modules:');
-  await callNpm('i', '-f', '--no-save', ...gnvDependencies);
+  await callNpm('i', '-f', '--no-save', '--silent', ...gnvDependencies);
   spacer(`Installed ${gnvDependencies.length} packages.`);
 };
 
@@ -401,14 +379,14 @@ export const installGlobalDeps = async (directory) => {
    * Install peerDeps globally.
    */
   spacer('Adding global peerDeps:');
-  await callNpm('i', '-g', '--no-save', ...peerDependencies);
+  await callNpm('i', '-g', '--no-save', '--silent', ...peerDependencies);
 
   /**
    * Link peerDeps locally. Also links this package so that CLIs are
    * available.
    */
   spacer('Linking peer dependencies locally...');
-  await callNpm('link', '-f', '--no-save', ...anyVersionPeerDeps);
+  await callNpm('link', '-f', '--no-save', '--silent', ...anyVersionPeerDeps);
   spacer(`Installed and linked ${peerDependencies.length} packages.`);
 };
 
