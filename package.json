@@ -1,13 +1,13 @@
 {
-  "name": "gnv-template",
+  "name": "open-company",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "gnv-template": "./dist/cli.cjs",
-    "gnv-template-dev": "./exports/cli.js"
+    "open-company": "./dist/cli.cjs",
+    "open-company-dev": "./exports/cli.js"
   },
   "main": "./dist/node.cjs",
   "exports": {
